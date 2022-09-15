@@ -9,7 +9,7 @@ import com.paymybuddy.prototype.model.Account;
 import com.paymybuddy.prototype.repository.AccountRepository;
 
 @Service
-
+// Add Interface
 public class AccountService {
     @Autowired
     private AccountRepository accountRepository;

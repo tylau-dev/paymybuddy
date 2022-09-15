@@ -1,10 +1,13 @@
 package com.paymybuddy.prototype.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -12,14 +15,16 @@ import javax.persistence.Table;
 public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "contact_id")
     private int contactId;
 
-    @Column(name = "sender_account_id")
-    private int senderAccountId;
+    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @JoinColumn(name = "sender_account_id")
+    private Account senderAccount;
 
-    @Column(name = "receiver_account_id")
-    private float receiverAccountId;
+    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @JoinColumn(name = "receiver_account_id")
+    private Account receiverAccount;
 
     public int getContactId() {
 	return contactId;
@@ -29,20 +34,20 @@ public class Contact {
 	this.contactId = contactId;
     }
 
-    public int getSenderAccountId() {
-	return senderAccountId;
+    public Account getSenderAccount() {
+	return senderAccount;
     }
 
-    public void setSenderAccountId(int senderAccountId) {
-	this.senderAccountId = senderAccountId;
+    public void setSenderAccount(Account senderAccount) {
+	this.senderAccount = senderAccount;
     }
 
-    public float getReceiverAccountId() {
-	return receiverAccountId;
+    public Account getReceiverAccount() {
+	return receiverAccount;
     }
 
-    public void setReceiverAccountId(float receiverAccountId) {
-	this.receiverAccountId = receiverAccountId;
+    public void setReceiverAccount(Account receiverAccount) {
+	this.receiverAccount = receiverAccount;
     }
 
 }

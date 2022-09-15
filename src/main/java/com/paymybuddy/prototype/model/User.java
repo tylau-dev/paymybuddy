@@ -10,7 +10,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -19,7 +18,7 @@ import javax.persistence.Table;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "user_id")
     private int userId;
 
     @Column(name = "email")
@@ -33,6 +32,9 @@ public class User {
 
     @Column(name = "lastname")
     private String lastName;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Account> accounts = new ArrayList<>();
 
     public int getUserId() {
 	return userId;
@@ -74,16 +76,24 @@ public class User {
 	this.lastName = lastName;
     }
 
-    @OneToMany(mappedBy = "Account", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @JoinColumn(name = "id")
-    List<Account> accounts = new ArrayList<>();
-
     public List<Account> getAccounts() {
 	return accounts;
     }
 
     public void setAccounts(List<Account> accounts) {
 	this.accounts = accounts;
+    }
+
+    public User() {
+    }
+
+    public User(int userId, String email, String password, String firstName, String lastName) {
+	super();
+	this.userId = userId;
+	this.email = email;
+	this.password = password;
+	this.firstName = firstName;
+	this.lastName = lastName;
     }
 
 }
