@@ -18,6 +18,7 @@ public class Account {
     @Column(name = "account_name")
     private String accountName;
 
+//    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     @Column(name = "user_id")
     private int userId;
 
