@@ -25,10 +25,6 @@ public class Transaction {
     @JoinColumn(name = "contact_id")
     private Contact contact;
 
-//    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-//    @JoinTable(name = "contact", joinColumns = @JoinColumn(name = "contact_id"), inverseJoinColumns = @JoinColumn(name = "receiver_account_id"))
-//    private Account receiverAccount;
-
     @Column(name = "description")
     private String description;
 
@@ -82,13 +78,25 @@ public class Transaction {
     }
 
     public Contact getContact() {
-        return contact;
+	return contact;
     }
 
     public void setContact(Contact contact) {
-        this.contact = contact;
+	this.contact = contact;
     }
 
-    
-    
+    public Transaction() {
+    }
+
+    public Transaction(int transactionId, Contact contact, String description, float transferredAmount,
+	    float paidAmount, Date transactionDate) {
+	super();
+	this.transactionId = transactionId;
+	this.contact = contact;
+	this.description = description;
+	this.transferredAmount = transferredAmount;
+	this.paidAmount = paidAmount;
+	this.transactionDate = transactionDate;
+    }
+
 }
