@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.junit.After;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,7 +17,7 @@ import com.paymybuddy.prototype.model.User;
 
 @SpringBootTest
 //@DataJpaTest
-public class AccountServiceIntTest {
+public class AccountServiceIntegrationTest {
     @Autowired
     private AccountService accountService;
     private static int accountTestId = 999999999;
@@ -25,6 +26,11 @@ public class AccountServiceIntTest {
 	    "test_user_ln_1");
     private static Account accountToAdd = new Account(accountTestId, "testAccountName", userToAdd, 0);
     private static Account accountToDelete = new Account(accountTestId, "testAccountDeleteName", userToAdd, 0);
+
+    @BeforeAll
+    public void setUpTestUser() {
+
+    }
 
     @Test
     public void shouldGetAllAccount() {

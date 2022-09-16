@@ -50,4 +50,15 @@ public class Contact {
 	this.receiverAccount = receiverAccount;
     }
 
+    public Contact() {
+
+    }
+
+    public Contact(int contactId, Account senderAccount, Account receiverAccount) {
+	super();
+	this.contactId = contactId;
+	this.senderAccount = senderAccount;
+	this.receiverAccount = receiverAccount;
+    }
+
 }
