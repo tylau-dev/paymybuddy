@@ -14,7 +14,6 @@ import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.paymybuddy.prototype.model.Contact;
@@ -26,13 +25,6 @@ import com.paymybuddy.prototype.repository.TransactionRepository;
 public class TransactionServiceTest {
     private ITransactionService transactionService;
 
-//	this.transactionId = transactionId;
-//	this.contact = contact;
-//	this.description = description;
-//	this.transferredAmount = transferredAmount;
-//	this.paidAmount = paidAmount;
-//	this.transactionDate = transactionDate;
-
     private static Transaction transactionToAdd = new Transaction(1, new Contact(), "transaction description", 0, 0,
 	    new Date());
 
@@ -41,7 +33,6 @@ public class TransactionServiceTest {
 
     @BeforeEach
     public void setUp() {
-	MockitoAnnotations.initMocks(this);
 	transactionService = new TransactionService(transactionRepository);
     }
 
