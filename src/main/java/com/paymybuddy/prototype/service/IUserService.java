@@ -10,6 +10,8 @@ public interface IUserService {
 
     public Optional<User> getUserById(Integer id);
 
+    public Optional<User> getUserByEmail(String email);
+
     public User saveUser(User user);
 
     public void deleteUserById(Integer id);

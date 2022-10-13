@@ -33,7 +33,7 @@ public class TransactionServiceTest {
 
     @BeforeEach
     public void setUp() {
-	transactionService = new TransactionService(transactionRepository);
+	transactionService = new TransactionServiceImpl(transactionRepository);
     }
 
     @Test

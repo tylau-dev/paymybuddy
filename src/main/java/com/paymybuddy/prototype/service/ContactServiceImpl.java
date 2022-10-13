@@ -9,10 +9,10 @@ import com.paymybuddy.prototype.repository.ContactRepository;
 
 @Service
 
-public class ContactService implements IContactService {
+public class ContactServiceImpl implements IContactService {
     private ContactRepository contactRepository;
 
-    public ContactService(ContactRepository contactRepository) {
+    public ContactServiceImpl(ContactRepository contactRepository) {
 	this.contactRepository = contactRepository;
     }
 

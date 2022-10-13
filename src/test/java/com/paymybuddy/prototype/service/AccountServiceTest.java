@@ -32,7 +32,7 @@ public class AccountServiceTest {
     @BeforeEach
     public void setUp() {
 	MockitoAnnotations.initMocks(this);
-	accountService = new AccountService(accountRepository);
+	accountService = new AccountServiceImpl(accountRepository);
     }
 
     @Test

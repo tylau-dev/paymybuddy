@@ -32,7 +32,7 @@ public class ContactServiceUnitTest {
     @BeforeEach
     public void setUp() {
 	MockitoAnnotations.initMocks(this);
-	contactService = new ContactService(contactRepository);
+	contactService = new ContactServiceImpl(contactRepository);
     }
 
     @Test
