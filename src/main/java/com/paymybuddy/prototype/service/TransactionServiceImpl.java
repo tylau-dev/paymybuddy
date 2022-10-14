@@ -9,10 +9,10 @@ import com.paymybuddy.prototype.repository.TransactionRepository;
 
 @Service
 
-public class TransactionService implements ITransactionService {
+public class TransactionServiceImpl implements ITransactionService {
     private TransactionRepository transactionRepository;
 
-    public TransactionService(TransactionRepository transactionRepository) {
+    public TransactionServiceImpl(TransactionRepository transactionRepository) {
 	this.transactionRepository = transactionRepository;
     }
 
@@ -28,6 +28,7 @@ public class TransactionService implements ITransactionService {
 
     @Override
     public Transaction saveTransaction(Transaction transaction) {
+	// Apply rate
 	return transactionRepository.save(transaction);
     }
 

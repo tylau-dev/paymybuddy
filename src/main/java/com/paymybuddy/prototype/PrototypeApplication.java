@@ -11,25 +11,25 @@ import com.paymybuddy.prototype.model.Account;
 import com.paymybuddy.prototype.model.Contact;
 import com.paymybuddy.prototype.model.Transaction;
 import com.paymybuddy.prototype.model.User;
-import com.paymybuddy.prototype.service.AccountService;
-import com.paymybuddy.prototype.service.ContactService;
-import com.paymybuddy.prototype.service.TransactionService;
-import com.paymybuddy.prototype.service.UserService;
+import com.paymybuddy.prototype.service.AccountServiceImpl;
+import com.paymybuddy.prototype.service.ContactServiceImpl;
+import com.paymybuddy.prototype.service.TransactionServiceImpl;
+import com.paymybuddy.prototype.service.UserServiceImpl;
 
 @SpringBootApplication
 public class PrototypeApplication implements CommandLineRunner {
 
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userService;
 
     @Autowired
-    private AccountService accountService;
+    private AccountServiceImpl accountService;
 
     @Autowired
-    private TransactionService transactionService;
+    private TransactionServiceImpl transactionService;
 
     @Autowired
-    private ContactService contactService;
+    private ContactServiceImpl contactService;
 
     public static void main(String[] args) {
 	SpringApplication.run(PrototypeApplication.class, args);

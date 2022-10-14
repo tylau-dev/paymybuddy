@@ -9,10 +9,10 @@ import com.paymybuddy.prototype.repository.AccountRepository;
 
 @Service
 // Add Interface
-public class AccountService implements IAccountService {
+public class AccountServiceImpl implements IAccountService {
     private AccountRepository accountRepository;
 
-    public AccountService(AccountRepository accountRepository) {
+    public AccountServiceImpl(AccountRepository accountRepository) {
 	this.accountRepository = accountRepository;
     }
 

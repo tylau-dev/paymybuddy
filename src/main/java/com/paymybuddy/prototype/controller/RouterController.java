@@ -1,12 +1,14 @@
 package com.paymybuddy.prototype.controller;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 
-public class FrontController {
+public class RouterController {
 
     @RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
     public String index() {
@@ -23,9 +25,16 @@ public class FrontController {
 	return "transfer";
     }
 
-    @RequestMapping(value = { "/login" }, method = RequestMethod.GET)
-    public String login() {
-	return "login";
+    @RequestMapping(value = { "/home" }, method = RequestMethod.GET)
+    public String home() {
+	return "home";
+    }
+
+    // For retrieving current username
+    @RequestMapping(value = "/username", method = RequestMethod.GET)
+    @ResponseBody
+    public String currentUserName(Authentication authentication) {
+	return authentication.getName();
     }
 
 }

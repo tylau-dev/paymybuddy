@@ -1,1 +1,25 @@
-Index
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link th:href="@{/css/style.css}" href="/css/style.css" rel="stylesheet" type="text/css" />
+	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+	
+    <title>Protoype Paymybuddy Landingpage</title>
+</head>
+
+<body style="height: 100%;">
+	<div th:class="index-menu">
+		<img th:class="logo-index" th:src="@{/img/logo.png}"/>
+		<a href="/login">
+			<button type="button" class="btn btn-primary m-1" th:href="@{/login}">Sign In</button>
+		</a>
+		<a href="/register">
+			<button type="button" class="btn btn-warning m-1" th:href="@{/register}">Sign Up</button>
+		</a>
+	</div>
+</body>
+
+</html>
