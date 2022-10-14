@@ -11,29 +11,36 @@
 
   <body>
   <div class="container">
-	    <form th:action="@{/register/save}" th:object="${userRegistration}" method="post">  
-	      <div class="form-group">
-	      	<label for="email">Email</label>:
-	      	<input type="text" id="username" name="username" autofocus="autofocus" th:field="*{email}" placeholder="Enter email"/> <br />
-	        <span class="has-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
-	      </div>  
-	      <div class="form-group">
-		      <label for="password">Password</label>:
-		      <input type="password" id="password" name="password" th:field="*{password}" placeholder="Password"/> <br />
-	          <span class="has-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
-	      </div>  
-	      <div class="form-group">
-		      <label for="firstName">First Name</label>:
-	    	  <input type="text" id="firstName" name="firstName" autofocus="autofocus"  th:field="*{firstName}" placeholder="First Name"/> <br />
-	          <span class="has-error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
-	      </div>  
-	      <div class="form-group">
-		      <label for="lastName">Last Name</label>:
-	    	  <input type="text" id="lastName" name="lastName" autofocus="autofocus"  th:field="*{lastName}" placeholder="Last Name"/> <br />      
-	      	  <span class="has-error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
-	      </div>  
-	      <input class="btn btn-primary" type="submit" value="Register" />
-	    </form>
+  	<div class="row justify-content-center">
+	    <div class="border border-secondary rounded d-flex flex-column justify-content-center-sm align-items-center col-sm-5">	    
+		    <div class="header-icon form-icon">Pay My Buddy</div>
+		    <form th:action="@{/register/save}" th:object="${userRegistration}" method="post">  
+		      <div class="form-group">
+		      	<label for="email">Email:</label>
+		      	<input type="text" id="username" name="username" autofocus="autofocus" th:field="*{email}" placeholder="Email"/> <br />
+		        <span class="has-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+		      </div>  
+		      <div class="form-group">
+			      <label for="password">Password:</label>
+			      <input type="password" id="password" name="password" th:field="*{password}" placeholder="Password"/> <br />
+		          <span class="has-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+		      </div>  
+		      <div class="form-group">
+			      <label for="firstName">First Name:</label>
+		    	  <input type="text" id="firstName" name="firstName" autofocus="autofocus"  th:field="*{firstName}" placeholder="First Name"/> <br />
+		          <span class="has-error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
+		      </div>  
+		      <div class="form-group">
+			      <label for="lastName">Last Name:</label>
+		    	  <input type="text" id="lastName" name="lastName" autofocus="autofocus"  th:field="*{lastName}" placeholder="Last Name"/> <br />      
+		      	  <span class="has-error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+		      </div>
+		      <div class="form-group">
+		      	  <input class="btn btn-primary" type="submit" value="Register" />
+		      </div>
+		    </form>
+	    </div>
+	  </div>
     </div>
   </body>
 </html>

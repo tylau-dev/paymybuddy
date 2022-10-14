@@ -40,11 +40,16 @@
 
 .header-icon {
 	border-radius: 4px;
-	background: linear-gradient(70deg, #62BA59, #88C34A);
+	background: linear-gradient(30deg, #62BA59, #88C34A);
+	color: white;
 	border: none;
 	display: inline-block;
 	padding: 10px 35px;
 	margin: 5px;
+}
+
+.form-icon {
+	margin-bottom: 20px;
 }
 
 .has-error {
@@ -61,4 +66,15 @@
 	display: flex;
 	justify-content: right;
 	text-align: center;
+}
+
+.input-group-text {
+	background-color: white !important;
+	border-radius: 0.25rem 0 0 0.25rem !important;
+	border-right: none !important;
+}
+
+.form-control {
+	border-left: none !important;
+	border-radius: 0 0.25rem 0.25rem 0 !important;
 }
