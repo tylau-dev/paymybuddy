@@ -39,6 +39,7 @@
 }
 
 .header-icon {
+	cursor: unset;
 	border-radius: 4px;
 	background: linear-gradient(30deg, #62BA59, #88C34A);
 	color: white;

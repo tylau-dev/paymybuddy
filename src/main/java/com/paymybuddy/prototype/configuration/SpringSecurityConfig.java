@@ -26,12 +26,14 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
 
-	http.authorizeRequests().antMatchers("/").permitAll().antMatchers("/contact").hasRole("USER")
-		.antMatchers("/transfer").hasRole("USER").and().formLogin()
+	http.csrf().disable().authorizeRequests().antMatchers("/").permitAll().and().formLogin()
 		.loginProcessingUrl("/j_spring_security_check").loginPage("/login").defaultSuccessUrl("/", true)
-		.failureUrl("/login?error=true").permitAll().and().logout().permitAll().deleteCookies("JSESSIONID")
-		.and().exceptionHandling().accessDeniedPage("/403").and().rememberMe().key("uniqueAndSecret");
-	;
+		.failureUrl("/login?error=true").permitAll().and().exceptionHandling().accessDeniedPage("/403").and()
+		.rememberMe().key("uniqueAndSecret").and()
+		.logout(logout -> logout.logoutSuccessUrl("/").invalidateHttpSession(true).deleteCookies("JSESSIONID"));
+
+//		.logout()
+//		.logoutSuccessUrl("/").deleteCookies("JSESSIONID").permitAll();
     }
 
     @Override
