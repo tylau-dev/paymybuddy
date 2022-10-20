@@ -15,25 +15,11 @@ public class RouterController {
 	return "index";
     }
 
-    @RequestMapping(value = { "/contact" }, method = RequestMethod.GET)
-    public String contact() {
-	return "contact";
-    }
-
-    @RequestMapping(value = { "/transfer" }, method = RequestMethod.GET)
-    public String transfer() {
-	return "transfer";
-    }
-
-    @RequestMapping(value = { "/home" }, method = RequestMethod.GET)
-    public String home() {
-	return "home";
-    }
-
     // For retrieving current username
     @RequestMapping(value = "/username", method = RequestMethod.GET)
     @ResponseBody
     public String currentUserName(Authentication authentication) {
+	// contains username = email
 	return authentication.getName();
     }
 

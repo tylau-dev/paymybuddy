@@ -27,6 +27,11 @@ public class TransactionServiceImpl implements ITransactionService {
     }
 
     @Override
+    public Iterable<Transaction> getCurrentUserTransaction(String email) {
+	return transactionRepository.getTransactionByEmail(email);
+    }
+
+    @Override
     public Transaction saveTransaction(Transaction transaction) {
 	// Apply rate
 	return transactionRepository.save(transaction);

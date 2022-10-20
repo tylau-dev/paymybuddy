@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.paymybuddy.prototype.model.User;
 import com.paymybuddy.prototype.service.IUserService;
+import com.paymybuddy.prototype.validator.UserValidator;
 
 @Controller
 public class RegisterController {

@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link th:href="@{/css/style.css}" href="/css/style.css" rel="stylesheet" type="text/css" />
+	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
 </head>
 	
 	<div class="header-menu">
@@ -18,6 +19,27 @@
 		</div>
 	</div>
 
+	<div class="container">
+		<table class="table">
+                <thead>
+                    <tr>
+                        <th>Contact id (to be replaced)</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="transaction : ${transactions}">
+                        <td th:text="${transaction.contact.contactId}"></td>
+                        <td th:text="${transaction.description}"></td>
+                        <td th:text="${transaction.transferredAmount}"></td>
+                        <td th:text="${transaction.transactionDate}"></td>
+                    </tr>
+                </tbody>
+       </table>	
+	
+	</div>
 
 
 
