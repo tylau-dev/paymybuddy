@@ -5,12 +5,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link th:href="@{/css/style.css}" href="/css/style.css" rel="stylesheet" type="text/css" />
+	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+
 </head>
 	
 	<div th:replace="fragments/header :: header">...</div>
 
 
-
+	<div class="d-flex flex-column">
+		<div>
+			Tableau contacts existants
+		</div>
+	
+	    <div class="border border-secondary rounded d-flex flex-column justify-content-center-sm align-items-center col-sm-5">	    
+	  		<span>Add a new conctact</span>
+		    <form th:action="@{/contact/save}" th:object="${contactRegistration}" method="post" class="my-2 d-flex flex-column">  
+		      <div class="form-group">
+		      	<label for="email">Contact Email:</label>
+		      	<input type="text" id="username" name="username" autofocus="autofocus" th:field="*{receiverEmail}" placeholder="Contact Email"/> <br />
+		        <span class="has-error" th:if="${#fields.hasErrors('receiverEmail')}" th:errors="*{receiverEmail}"></span>
+		      </div>  
+		      <div class="form-group">
+		      	  <input class="btn btn-primary" type="submit" value="Register" />
+		      </div>
+		    </form>
+		    </div>
+	</div>
 
 
 </html>
