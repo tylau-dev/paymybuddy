@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.paymybuddy.prototype.model.Account;
 import com.paymybuddy.prototype.model.User;
@@ -25,47 +26,49 @@ public class AccountServiceImpl implements IAccountService {
     }
 
     @Override
+    @Transactional
     public Iterable<Account> getAccounts() {
 	return accountRepository.findAll();
     }
 
     @Override
+    @Transactional
     public Optional<Account> getAccountById(Integer id) {
 	return accountRepository.findById(id);
     }
 
     @Override
+    @Transactional
     public Account saveAccount(Account account) {
 	return accountRepository.save(account);
     }
 
     @Override
+    @Transactional
     public Account saveDefaultAccount(User user) {
 	Account defaultAccount = new Account();
 	defaultAccount.setUser(user);
-	defaultAccount.setAccountName("default account");
+	// By default and for simplification: AccountName = Lastname + Firstname
+	defaultAccount.setAccountName(user.getLastName() + " " + user.getFirstName());
 	defaultAccount.setBalance(0);
 
 	return accountRepository.save(defaultAccount);
     }
 
     @Override
+    @Transactional
     public void deleteAccountById(Integer id) {
 	accountRepository.deleteById(id);
     }
 
     @Override
+    @Transactional
     public Account getDefaultAccountByEmail(String email) {
 	User user = userService.getUserByEmail(email).get();
 
 	Account account = accountRepository.getAccountByUserId(user.getUserId()).get();
 
 	return account;
-//
-//	List<Account> accountList = new ArrayList<Account>();
-//	accountRepository.getAccountByEmail(email).forEach(accountList::add);
-//
-//	return accountList.get(0);
     }
 
 }

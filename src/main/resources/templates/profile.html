@@ -5,10 +5,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link th:href="@{/css/style.css}" href="/css/style.css" rel="stylesheet" type="text/css" />
+	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
 </head>
 	
 	<div th:replace="fragments/header :: header">...</div>
 
+	<div class="container">
+		  	<div class="row justify-content-center">
+	    <div class="border border-secondary rounded d-flex flex-column justify-content-center-sm align-items-center col-sm-5">	    
+		    <form th:action="@{/register/save}" th:object="${userProfile}" method="post" class="my-2 d-flex flex-column">  
+		      <div class="form-group">
+		      	<label for="email">Email:</label>
+		      	<input type="text" id="username" name="username" autofocus="autofocus" th:field="*{email}" th:value="${userProfile.email}" disabled readonly/> <br />
+		      </div>  
+		      <div class="form-group">
+			      <label for="firstName">First Name:</label>
+		    	  <input type="text" id="firstName" name="firstName" autofocus="autofocus"  th:field="*{firstName}" th:value="${userProfile.firstName}" disabled readonly/> <br />
+		      </div>  
+		      <div class="form-group">
+			      <label for="lastName">Last Name:</label>
+		    	  <input type="text" id="lastName" name="lastName" autofocus="autofocus"  th:field="*{lastName}" th:value="${userProfile.lastName}" disabled readonly/> <br />      
+		      </div>
+		    </form>
+	    </div>
+		
+	
+		
+	</div>
+	
 
 
 

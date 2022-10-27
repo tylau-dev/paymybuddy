@@ -11,10 +11,11 @@
 	<div th:replace="fragments/header :: header">...</div>
 
 	<div class="container">
-		<table class="table">
-                <thead>
+		<table class="table table-striped">
+                <thead style="background-color:#5CB95C; color:#ffffff">
                     <tr>
-                        <th>Contact id (to be replaced)</th>
+                        <th>Sender</th>
+                        <th>Receiver</th>
                         <th>Description</th>
                         <th>Amount</th>
                         <th>Date</th>
@@ -22,7 +23,8 @@
                 </thead>
                 <tbody>
                     <tr th:each="transaction : ${transactions}">
-                        <td th:text="${transaction.contact.contactId}"></td>
+                        <td th:text="${transaction.contact.senderAccount.accountName}"></td>
+                        <td th:text="${transaction.contact.receiverAccount.accountName}"></td>
                         <td th:text="${transaction.description}"></td>
                         <td th:text="${transaction.transferredAmount}"></td>
                         <td th:text="${transaction.transactionDate}"></td>
@@ -31,7 +33,5 @@
        </table>	
 	
 	</div>
-
-
 
 </html>

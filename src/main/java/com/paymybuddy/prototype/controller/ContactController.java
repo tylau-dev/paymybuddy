@@ -1,5 +1,8 @@
 package com.paymybuddy.prototype.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -35,6 +38,11 @@ public class ContactController {
 	this.currentUserEmail = authentication.getName();
 
 	model.addAttribute("contactRegistration", new ContactForm());
+
+	List<Contact> currentUserContacts = new ArrayList<Contact>();
+	contactService.getCurrentUserContact(currentUserEmail).forEach(currentUserContacts::add);
+
+	model.addAttribute("contacts", currentUserContacts);
 
 	return "contact";
     }
