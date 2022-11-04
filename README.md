@@ -38,4 +38,4 @@ mvn spring-boot:run
 |  /home        |  Home page after Login (protected through authentification) |
 |  /profile        |  Profile page for managing contacts and balance (protected through authentification)   |
 |  /transfer        |  Transfer page for making transactions (protected through authentification) |
-|  /logout        |  Log out    |# paymybuddy
+|  /logout        |  Log out    |
