@@ -50,7 +50,7 @@ public class RegisterController {
 	accountService.saveDefaultAccount(registeredUser);
 
 	// Redirect to "register successful" landing page
-	return "redirect:/";
+	return "redirect:/index?success=true";
     }
 
 }

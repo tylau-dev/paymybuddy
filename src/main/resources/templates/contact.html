@@ -11,35 +11,9 @@
 	
 	<div th:replace="fragments/header :: header">...</div>
 
-
-	<div class="d-flex container justify-content-center border border-secondary">
-		<div>
-			<table class="table table-striped">
-				<thead>
-                    <tr>
-                        <th>Nom du contact</th>
-                    </tr>
-                </thead>
-			<tr th:each="contact : ${contacts}">
-				<td th:text="${contact.receiverAccount.accountName}"></td>
-            </tr>
-			</table>
-		</div>
-	
-	    <div class="rounded d-flex flex-column justify-content-center-sm align-items-center col-sm-5">	    
-	  		<span class="p-2"><b>Add a new conctact</b></span>
-		    <form th:action="@{/contact/save}" th:object="${contactRegistration}" method="post" class="my-2 d-flex flex-column align-items-center">  
-		      <div class="form-group">
-		      	<label for="email">Contact Email:</label>
-		      	<input type="text" id="username" name="username" autofocus="autofocus" th:field="*{receiverEmail}" placeholder="Contact Email"/> <br />
-		        <span class="has-error" th:if="${#fields.hasErrors('receiverEmail')}" th:errors="*{receiverEmail}"></span>
-		      </div>  
-		      <div class="form-group">
-		      	  <input class="btn btn-primary" type="submit" value="Register" />
-		      </div>
-		    </form>
-		    </div>
-	</div>
+	<body>
+		Lorem Ipsum
+	</body>
 
 
 </html>

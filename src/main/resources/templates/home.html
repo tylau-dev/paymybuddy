@@ -10,28 +10,11 @@
 	
 	<div th:replace="fragments/header :: header">...</div>
 
-	<div class="container">
-		<table class="table table-striped">
-                <thead style="background-color:#5CB95C; color:#ffffff">
-                    <tr>
-                        <th>Sender</th>
-                        <th>Receiver</th>
-                        <th>Description</th>
-                        <th>Amount</th>
-                        <th>Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="transaction : ${transactions}">
-                        <td th:text="${transaction.contact.senderAccount.accountName}"></td>
-                        <td th:text="${transaction.contact.receiverAccount.accountName}"></td>
-                        <td th:text="${transaction.description}"></td>
-                        <td th:text="${transaction.transferredAmount}"></td>
-                        <td th:text="${transaction.transactionDate}"></td>
-                    </tr>
-                </tbody>
-       </table>	
-	
-	</div>
+	<body>
+	        <p>Welcome 
+	        <span th:text="*{firstName}"></span>
+	        <span th:text="*{lastName}"></span>
+	        </p>
+	</body>
 
 </html>

@@ -46,6 +46,7 @@ public class ContactValidator implements Validator {
 	Optional<User> userEmailResult = userService.getUserByEmail(receiverEmail);
 	try {
 	    userEmailResult.get();
+
 	} catch (Exception e) {
 	    errors.rejectValue("receiverEmail", "Nonexisting.ContactRegistration.receiverEmail");
 	}

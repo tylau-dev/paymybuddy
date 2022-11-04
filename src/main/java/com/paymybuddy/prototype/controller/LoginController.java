@@ -14,11 +14,6 @@ public class LoginController {
     @Autowired
     private IUserService userService;
 
-    // @Todo security service for automatic login???
-
-//    @Autowired
-//    private IAccountService accountService;
-
     @Autowired
     PasswordEncoder passwordEncoder;
 
