@@ -22,8 +22,8 @@ CREATE TABLE IF NOT EXISTS user (
 );
 
 INSERT INTO user (email, password, firstname, lastname) VALUES 
-('testemail@email.com','$2a$12$U29ONFtPmYKC7kgwDBataOCGKSSxkUw9nRxz0ADRMX2ikyN7NjU7K', 'test_user_fn_1', 'test_user_ln_1'),
-('testemail2@email.com', '$2a$12$U29ONFtPmYKC7kgwDBataOCGKSSxkUw9nRxz0ADRMX2ikyN7NjU7K', 'test_user_fn_2', 'test_user_ln_2');
+('john@gmail.com','$2a$12$U29ONFtPmYKC7kgwDBataOCGKSSxkUw9nRxz0ADRMX2ikyN7NjU7K', 'John', 'Doe'),
+('pierre@gmail.com', '$2a$12$U29ONFtPmYKC7kgwDBataOCGKSSxkUw9nRxz0ADRMX2ikyN7NjU7K', 'Pierre', 'Dupont');
 
 
 CREATE TABLE IF NOT EXISTS user_role (
@@ -44,8 +44,8 @@ CREATE TABLE IF NOT EXISTS account (
 );
 
 INSERT INTO account (user_id, account_name,balance) VALUES 
-(1, 'compte_test_1', 0),
-(2, 'compte_test_2', 0);
+(1, 'Doe John', 0),
+(2, 'Dupont Pierre', 0);
 
 
 CREATE TABLE IF NOT EXISTS contact (
@@ -72,15 +72,3 @@ CREATE TABLE IF NOT EXISTS transaction (
 
 INSERT INTO transaction (contact_id, description, transferred_amount, paid_amount, transaction_date) VALUES
 (1, 'Test transfer', 10, 10.5, '2022-08-26');
-
-DROP TABLE transaction;
-DROP TABLE contact;
-DROP TABLE account;
-DROP TABLE user;
-DROP TABLE role;
-
-UPDATE user
-SET 
-	password = '$2a$12$U29ONFtPmYKC7kgwDBataOCGKSSxkUw9nRxz0ADRMX2ikyN7NjU7K'
-WHERE 
-	user_id = 1 OR user_id = 2;

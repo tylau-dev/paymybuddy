@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name = "transaction")
 
@@ -35,6 +37,7 @@ public class Transaction {
     private float paidAmount;
 
     @Column(name = "transaction_date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date transactionDate;
 
     public int getTransactionId() {

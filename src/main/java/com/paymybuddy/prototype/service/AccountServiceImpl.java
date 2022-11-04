@@ -57,6 +57,12 @@ public class AccountServiceImpl implements IAccountService {
 
     @Override
     @Transactional
+    public void saveBalance(float newBalance, int accountId) {
+	accountRepository.setBalanceById(newBalance, accountId);
+    }
+
+    @Override
+    @Transactional
     public void deleteAccountById(Integer id) {
 	accountRepository.deleteById(id);
     }
