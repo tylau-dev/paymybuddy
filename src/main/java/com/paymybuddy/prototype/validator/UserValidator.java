@@ -1,4 +1,4 @@
-package com.paymybuddy.prototype.controller;
+package com.paymybuddy.prototype.validator;
 
 import java.util.Optional;
 

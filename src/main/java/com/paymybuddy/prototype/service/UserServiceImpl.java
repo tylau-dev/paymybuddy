@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.paymybuddy.prototype.model.Role;
 import com.paymybuddy.prototype.model.User;
@@ -23,21 +24,25 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    @Transactional
     public Iterable<User> getUsers() {
 	return userRepository.findAll();
     }
 
     @Override
+    @Transactional
     public Optional<User> getUserById(Integer id) {
 	return userRepository.findById(id);
     }
 
     @Override
+    @Transactional
     public Optional<User> getUserByEmail(String email) {
 	return userRepository.findByEmail(email);
     }
 
     @Override
+    @Transactional
     public User saveUser(User user) {
 	Role defaultRole = roleRepository.findById(1).get();
 	user.addRole(defaultRole);
@@ -45,6 +50,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    @Transactional
     public void deleteUserById(Integer id) {
 	userRepository.deleteById(id);
     }

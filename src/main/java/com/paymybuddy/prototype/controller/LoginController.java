@@ -14,23 +14,14 @@ public class LoginController {
     @Autowired
     private IUserService userService;
 
-    // @Todo security service for automatic login
-
-//    @Autowired
-//    private IAccountService accountService;
-
     @Autowired
     PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private UserValidator userValidator;
 
     @RequestMapping(value = { "/login" }, method = RequestMethod.GET)
     public String login(Model model, String error) {
 	if (error != null) {
 	    model.addAttribute("error", "Invalid Email or Password");
 	}
-
 	return "login";
     }
 

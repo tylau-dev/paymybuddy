@@ -29,10 +29,13 @@ public class AccountServiceTest {
     @Mock
     private AccountRepository accountRepository;
 
+    @Mock
+    private IUserService userService;
+
     @BeforeEach
     public void setUp() {
 	MockitoAnnotations.initMocks(this);
-	accountService = new AccountServiceImpl(accountRepository);
+	accountService = new AccountServiceImpl(accountRepository, userService);
     }
 
     @Test

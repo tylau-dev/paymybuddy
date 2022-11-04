@@ -13,4 +13,6 @@ public interface IContactService {
     public Contact saveContact(Contact contact);
 
     public void deleteContactById(Integer id);
+
+    public Iterable<Contact> getCurrentUserContact(String email);
 }

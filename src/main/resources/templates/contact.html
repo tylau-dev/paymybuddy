@@ -5,20 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link th:href="@{/css/style.css}" href="/css/style.css" rel="stylesheet" type="text/css" />
+	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+
 </head>
 	
-	<div class="header-menu">
-		<div class="header-icon"></div>
-		<div class="header-link-group">
-			<a href="/home">Home</a>
-			<a href="/transfer">Transfer</a>
-			<a href="/profile">Profile</a>
-			<a href="/contact">Contact</a>
-			<a href="/logoff">Log off</a>
-		</div>
-	</div>
+	<div th:replace="fragments/header :: header">...</div>
 
-
+	<body>
+		Lorem Ipsum
+	</body>
 
 
 </html>
