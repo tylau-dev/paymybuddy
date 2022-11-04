@@ -17,4 +17,6 @@ public interface IAccountService {
     public Account saveDefaultAccount(User user);
 
     public Account getDefaultAccountByEmail(String email);
+
+    void saveBalance(float newBalance, int accountId);
 }

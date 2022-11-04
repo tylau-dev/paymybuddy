@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.paymybuddy.prototype.model.Account;
 import com.paymybuddy.prototype.model.Contact;
 import com.paymybuddy.prototype.model.Transaction;
 import com.paymybuddy.prototype.model.TransactionForm;
+import com.paymybuddy.prototype.service.IAccountService;
 import com.paymybuddy.prototype.service.IContactService;
 import com.paymybuddy.prototype.service.ITransactionService;
 
@@ -26,9 +28,13 @@ public class TransferController {
     private ITransactionService transactionService;
 
     @Autowired
+    private IAccountService accountService;
+
+    @Autowired
     private IContactService contactService;
 
     private String currentUserEmail;
+    private Account currentAccount;
     private List<Contact> currentUserContacts;
 
     @RequestMapping(value = { "/transfer" }, method = RequestMethod.GET)
@@ -39,12 +45,16 @@ public class TransferController {
 	List<Transaction> currentUserTransactions = new ArrayList<Transaction>();
 	transactionService.getCurrentUserTransaction(currentUserEmail).forEach(currentUserTransactions::add);
 
-	model.addAttribute("transactions", currentUserTransactions);
-
 	// Retrieving data for list of contact
 	this.currentUserContacts = new ArrayList<Contact>();
 	contactService.getCurrentUserContact(currentUserEmail).forEach(this.currentUserContacts::add);
 
+	// Retrieving Balance from user
+	this.currentAccount = accountService.getDefaultAccountByEmail(this.currentUserEmail);
+	double maxBalance = Math.floor(currentAccount.getBalance() * 0.95f);
+
+	model.addAttribute("maxBalance", maxBalance);
+	model.addAttribute("transactions", currentUserTransactions);
 	model.addAttribute("currentUserContacts", this.currentUserContacts);
 	model.addAttribute("transferForm", new TransactionForm());
 
@@ -56,11 +66,16 @@ public class TransferController {
 	    BindingResult bindingResult) {
 	Transaction transactionToAdd = new Transaction();
 
+	// Manage transaction
 	transactionToAdd.setContact(contactService.getContactById(transactionForm.getContactId()).get());
 	transactionToAdd.setDescription(transactionForm.getDescription());
 	transactionToAdd.setTransferredAmount(transactionForm.getTransferredAmount());
 	transactionToAdd.setPaidAmount(transactionForm.getTransferredAmount() * 1.05f);
 	transactionToAdd.setTransactionDate(new Date());
+
+	// Update balance
+	accountService.saveBalance(currentAccount.getBalance() - (transactionForm.getTransferredAmount() * 1.05f),
+		currentAccount.getAccountId());
 
 	transactionService.saveTransaction(transactionToAdd);
 

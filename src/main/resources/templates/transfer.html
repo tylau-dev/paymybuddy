@@ -7,13 +7,26 @@
 	<link th:href="@{/css/style.css}" href="/css/style.css" rel="stylesheet" type="text/css" />
 	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
 </head>
-	
+	<body>
 	<div th:replace="fragments/header :: header">...</div>
+
+	<nav class="bg-light d-flex flex-row align-items-center mb-2">
+		    <div class="nav-item">
+		        <a class="nav-link text-secondary" href="/home">Home</a>
+		      </div>
+		      <div class="nav-item">
+				<span class="text-primary">/</span>
+		      </div>
+		      
+		      <div class="nav-item active">
+		        <a class="nav-link text-primary" href="#">Transfer</a>
+		      </div>
+	</nav>
 
 	<div class="container">
 		<div>
-			<div>
-				<span>Send Money</span>
+			<div class="d-flex justify-content-between">
+				<h4>Send Money</h4>
 				<a href="/profile">
 					<button type="button" class="btn btn-primary" data-toggle="modal" th:href="@{/profile}">
 					  Add Connection
@@ -21,9 +34,9 @@
 				</a>
 				
 			</div>
-			<div>
-			    <form th:if="${currentUserContacts != null}" th:action="@{/transfer/save}" th:object="${transferForm}" method="post" class="my-2 d-flex flex-column align-items-center">  
-			      <div class="form-group">
+			<div class="bg-light">
+			    <form th:if="${currentUserContacts != null}" th:action="@{/transfer/save}" th:object="${transferForm}" method="post" class="my-2 d-flex flex-row justify-content-center">  
+			      <div class="form-group d-flex flex-column mx-2">
 			      	<label for="contact">Select a Connection:</label>
                     <select th:field="*{contactId}">
                          <option th:each="contact : ${currentUserContacts}"
@@ -32,16 +45,17 @@
                          </option>
                   	</select>
 			      </div>
-			      <div class="form-group">
+			      <div class="form-group d-flex flex-column mx-2">
 			      	<label for="lastName">Description:</label>
-		    	  	<input type="text" id="description" name="description" autofocus="autofocus"  th:field="*{description}" placeholder="Description"/> <br />      
+		    	  	<input type="text" id="description" name="description" autofocus="autofocus"  th:field="*{description}" placeholder="Description"/>    
                    </div>
-                   <div class="form-group">
-			      		<input type="number" class="form-control" id="amount" autocomplete="off" th:field="*{transferredAmount}"
-                       min="0"/>
+                   <div class="form-group d-flex flex-column mx-2">
+                   		<label for="lastName">Transfer amount:</label>
+			      		<input type="number" id="amount" autocomplete="off" th:field="*{transferredAmount}"
+                       min="0" th:max="${maxBalance}"/>
                     </div>
 			      
-			      <div class="form-group">
+			      <div class="form-group d-flex flex-column mx-2 align-self-center">
 			      	  <input class="btn btn-primary" type="submit" value="Pay" />
 			      </div>
 			    </form>
@@ -49,8 +63,8 @@
 		</div>
 	
 		<div>
-			<span>My Transactions</span>
-			<table class="table table-striped">
+			<h4>My Transactions</h4>
+			<table class="table table-striped border">
 	                <thead style="background-color:#5CB95C; color:#ffffff">
 	                    <tr>
 	                        <th>Sender</th>
@@ -68,12 +82,12 @@
 	                        <td th:text="${transaction.description}"></td>
 	                        <td th:text="${transaction.transferredAmount}"></td>
 	                        <td th:text="${transaction.paidAmount}"></td>
-	                        <td th:text="${transaction.transactionDate}"></td>
+	                        <td th:text="${#dates.format(transaction.transactionDate, 'dd-MM-yyyy')}"></td>
 	                    </tr>
 	                </tbody>
 	        </table>	
 		</div>
 	</div>
 
-	
+	</body>
 </html>

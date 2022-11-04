@@ -7,14 +7,26 @@
 	<link th:href="@{/css/style.css}" href="/css/style.css" rel="stylesheet" type="text/css" />
 	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
 </head>
-	
-	<div th:replace="fragments/header :: header">...</div>
-
 	<body>
-	        <p>Welcome 
+	<div th:replace="fragments/header :: header">...</div>
+	
+	<nav class="bg-light d-flex flex-row align-items-center mb-2">
+		    <div class="nav-item active">
+		        <a class="nav-link text-primary" href="/home">Home</a>
+		      </div>
+		      <div class="nav-item">
+				<span class="text-primary">/</span>
+		      </div>
+	</nav>
+
+	<div class="container">
+		<div class="d-flex justify-content-center">
+	        <h2>Welcome 
 	        <span th:text="*{firstName}"></span>
 	        <span th:text="*{lastName}"></span>
-	        </p>
+	        </h2>
+	    </div>
+	</div>
 	</body>
-
+	
 </html>

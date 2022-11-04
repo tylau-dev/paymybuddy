@@ -31,9 +31,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		.failureUrl("/login?error=true").permitAll().and().exceptionHandling().accessDeniedPage("/403").and()
 		.rememberMe().key("uniqueAndSecret").and()
 		.logout(logout -> logout.logoutSuccessUrl("/").invalidateHttpSession(true).deleteCookies("JSESSIONID"));
-
-//		.logout()
-//		.logoutSuccessUrl("/").deleteCookies("JSESSIONID").permitAll();
     }
 
     @Override

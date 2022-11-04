@@ -7,34 +7,77 @@
 	<link th:href="@{/css/style.css}" href="/css/style.css" rel="stylesheet" type="text/css" />
 	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
 </head>
-	
+	<body>
 	<div th:replace="fragments/header :: header">...</div>
 
-	<div class="container">
-		<div class="row justify-content-center align-items-center">
-	    <div class="border border-secondary rounded d-flex flex-column justify-content-center-sm align-items-center col-sm-5">	    
-		    <form th:action="@{/register/save}" th:object="${userProfile}" method="post" class="my-2 d-flex flex-column">  
-		      <div class="form-group">
-		      	<label for="email">Email:</label>
-		      	<input type="text" id="username" name="username" autofocus="autofocus" th:field="*{email}" th:value="${userProfile.email}" disabled readonly/> <br />
-		      </div>  
-		      <div class="form-group">
-			      <label for="firstName">First Name:</label>
-		    	  <input type="text" id="firstName" name="firstName" autofocus="autofocus"  th:field="*{firstName}" th:value="${userProfile.firstName}" disabled readonly/> <br />
-		      </div>  
-		      <div class="form-group">
-			      <label for="lastName">Last Name:</label>
-		    	  <input type="text" id="lastName" name="lastName" autofocus="autofocus"  th:field="*{lastName}" th:value="${userProfile.lastName}" disabled readonly/> <br />      
+	<nav class="bg-light d-flex flex-row align-items-center mb-2">
+		    <div class="nav-item">
+		        <a class="nav-link text-secondary" href="/home">Home</a>
 		      </div>
-		    </form>
+		      <div class="nav-item">
+				<span class="text-primary">/</span>
+		      </div>
+		      
+		      <div class="nav-item active">
+		        <a class="nav-link text-primary" href="#">Profile</a>
+		      </div>
+	</nav>
+
+	<div class="container">
+		<div class="d-flex justify-content-center row align-items-center">
+		<div class="d-flex w-100 align-items-center justify-content-center">
+		<div class="col-sm-6">
+	    <div class="card">
+	    	<h5 class="card-header">User Information</h5>
+		    <div class="card-body">
+			    <form th:action="@{/register/save}" th:object="${userProfile}" method="post" class="my-2 d-flex flex-column">  
+			      <div class="form-group">
+			      	<label for="email">Email:</label>
+			      	<input type="text" id="username" name="username" autofocus="autofocus" th:field="*{email}" th:value="${userProfile.email}" disabled readonly/> <br />
+			      </div>  
+			      <div class="form-group">
+				      <label for="firstName">First Name:</label>
+			    	  <input type="text" id="firstName" name="firstName" autofocus="autofocus"  th:field="*{firstName}" th:value="${userProfile.firstName}" disabled readonly/> <br />
+			      </div>  
+			      <div class="form-group">
+				      <label for="lastName">Last Name:</label>
+			    	  <input type="text" id="lastName" name="lastName" autofocus="autofocus"  th:field="*{lastName}" th:value="${userProfile.lastName}" disabled readonly/> <br />      
+			      </div>
+			    </form>
+		    </div>
 	    </div>
+	    </div>
+	    
+	    <div class="col-sm-6">
+	    <div class="card">
+	    	<h5 class="card-header">Top up Balance</h5>
+	    	<div class="card-body">
+		    	<form th:action="@{/profile/balance}" th:object="${balanceForm}" method="post" class="my-2 d-flex flex-column">  
+			      <div class="form-group">
+			      	<label for="currentBalance">Current Balance</label>
+			      	<input type="text" id="currentBalance" name="currentBalance" autofocus="autofocus"  th:field="*{currentBalance}" th:value="${balanceForm.currentBalance}" disabled readonly/> <br />
+			      </div>
+			      <div class="form-group">
+			      	<label for="email">Amount to add:</label>
+			      	<input type="number" min="0" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" id="balancetoAdd" name="balancetoAdd" autofocus="autofocus" th:field="*{balancetoAdd}"/> <br />
+			      </div>  
+			      <div class="form-group">
+				      	  <input class="btn btn-primary" type="submit" value="Charge" />
+				   </div>
+			    </form>
+		    </div>
+			</div>
+	    </div>
+		</div>
 		
- 	<div class="d-flex container justify-content-center border border-secondary">
-		<div>
-			<table class="table table-striped">
+		<div class="d-flex w-100 align-items-center justify-content-center">
+		<div class="col-sm-6">
+	    <div class="card">
+	    	<h5 class="card-header">Connection List</h5>
+			<table class="table table-striped border my-2">
 				<thead>
                     <tr>
-                        <th>Nom du contact</th>
+                        <th>Name</th>
                     </tr>
                 </thead>
 			<tr th:each="contact : ${contacts}">
@@ -42,12 +85,14 @@
             </tr>
 			</table>
 		</div>
-	
-	    <div class="rounded d-flex flex-column justify-content-center-sm align-items-center col-sm-5">	    
-	  		<span class="p-2"><b>Add a new conctact</b></span>
+		</div>
+		
+		<div class="col-sm-6">
+	    <div class="card">	    
+	    	<h5 class="card-header">Create a connection</h5>
 		    <form th:action="@{/profile/connection/save}" th:object="${connectionRegistration}" method="post" class="my-2 d-flex flex-column align-items-center">  
 		      <div class="form-group">
-		      	<label for="email">Contact Email:</label>
+		      	<label for="email">Email:</label>
 		      	<input type="text" id="username" name="username" autofocus="autofocus" th:field="*{receiverEmail}" placeholder="Contact Email"/> <br />
 		        <span class="has-error" th:if="${#fields.hasErrors('receiverEmail')}" th:errors="*{receiverEmail}"></span>
 		      </div>  
@@ -56,11 +101,11 @@
 		      </div>
 		    </form>
 		</div>
+		</div>
+		</div>
 	</div>
-		
 	</div>
-	
-
+	</body>
 
 
 
