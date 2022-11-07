@@ -8,8 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.paymybuddy.prototype.model.Contact;
 import com.paymybuddy.prototype.repository.ContactRepository;
 
+/*
+ * Service for handling Contact related operations
+ */
 @Service
-
 public class ContactServiceImpl implements IContactService {
     private ContactRepository contactRepository;
 

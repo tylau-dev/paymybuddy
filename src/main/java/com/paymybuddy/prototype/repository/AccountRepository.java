@@ -12,7 +12,6 @@ import com.paymybuddy.prototype.model.Account;
 
 @Repository
 public interface AccountRepository extends CrudRepository<Account, Integer> {
-
     @Query(value = "SELECT * FROM Account a WHERE a.user_id = :userId", nativeQuery = true)
     public Optional<Account> getAccountByUserId(@Param("userId") int userId);
 

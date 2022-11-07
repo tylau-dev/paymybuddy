@@ -71,4 +71,15 @@ public class ContactServiceUnitTest {
 	verify(contactRepository, times(1)).deleteById(contactToAdd.getContactId());
     }
 
+    @Test
+    public void shouldGetContactByEmail() {
+	List<Contact> contactList = new ArrayList<>();
+	contactList.add(contactToAdd);
+
+	when(contactRepository.getContactByEmail("test@email.com")).thenReturn(contactList);
+
+	List<Contact> contacts = (List<Contact>) contactService.getCurrentUserContact("test@email.com");
+	assertEquals(contacts.get(0).getContactId(), contactToAdd.getContactId());
+    }
+
 }

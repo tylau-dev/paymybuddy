@@ -1,7 +1,6 @@
 package com.paymybuddy.prototype.controller;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +20,10 @@ import com.paymybuddy.prototype.service.IAccountService;
 import com.paymybuddy.prototype.service.IContactService;
 import com.paymybuddy.prototype.service.ITransactionService;
 
+/*
+ * Controller for /transfer endpoint
+ */
 @Controller
-
 public class TransferController {
     @Autowired
     private ITransactionService transactionService;
@@ -36,6 +37,7 @@ public class TransferController {
     private String currentUserEmail;
     private Account currentAccount;
     private List<Contact> currentUserContacts;
+    private boolean notEmptyContact;
 
     @RequestMapping(value = { "/transfer" }, method = RequestMethod.GET)
     public String transfer(Model model, Authentication authentication) {
@@ -43,11 +45,15 @@ public class TransferController {
 
 	// Retrieving data for transaction table
 	List<Transaction> currentUserTransactions = new ArrayList<Transaction>();
-	transactionService.getCurrentUserTransaction(currentUserEmail).forEach(currentUserTransactions::add);
+	transactionService.getTransactionsByMail(currentUserEmail).forEach(currentUserTransactions::add);
 
 	// Retrieving data for list of contact
 	this.currentUserContacts = new ArrayList<Contact>();
 	contactService.getCurrentUserContact(currentUserEmail).forEach(this.currentUserContacts::add);
+	this.notEmptyContact = false;
+	if (this.currentUserContacts.size() > 0) {
+	    this.notEmptyContact = true;
+	}
 
 	// Retrieving Balance from user
 	this.currentAccount = accountService.getDefaultAccountByEmail(this.currentUserEmail);
@@ -56,6 +62,7 @@ public class TransferController {
 	model.addAttribute("maxBalance", maxBalance);
 	model.addAttribute("transactions", currentUserTransactions);
 	model.addAttribute("currentUserContacts", this.currentUserContacts);
+	model.addAttribute("notEmptyContact", this.notEmptyContact);
 	model.addAttribute("transferForm", new TransactionForm());
 
 	return "transfer";
@@ -64,21 +71,11 @@ public class TransferController {
     @RequestMapping(value = "/transfer/save", method = RequestMethod.POST)
     public String registerSave(@ModelAttribute("transferForm") TransactionForm transactionForm,
 	    BindingResult bindingResult) {
-	Transaction transactionToAdd = new Transaction();
-
-	// Manage transaction
-	transactionToAdd.setContact(contactService.getContactById(transactionForm.getContactId()).get());
-	transactionToAdd.setDescription(transactionForm.getDescription());
-	transactionToAdd.setTransferredAmount(transactionForm.getTransferredAmount());
-	transactionToAdd.setPaidAmount(transactionForm.getTransferredAmount() * 1.05f);
-	transactionToAdd.setTransactionDate(new Date());
-
 	// Update balance
 	accountService.saveBalance(currentAccount.getBalance() - (transactionForm.getTransferredAmount() * 1.05f),
 		currentAccount.getAccountId());
 
-	transactionService.saveTransaction(transactionToAdd);
-
+	transactionService.saveTransactionFromForm(transactionForm);
 	return "redirect:/transfer";
     }
 

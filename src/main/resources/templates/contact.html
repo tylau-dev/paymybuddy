@@ -25,11 +25,40 @@
 		</nav>
 		<div class="container">
 	
-		<div class="d-flex justify-content-center">
-	        <p>Contact us: 
-	        </p>
+		<div class="d-flex w-100 align-items-center justify-content-center">
+		<div class="col-sm-6">
+	    <div class="card">
+	    	<h5 class="card-header">Connection List</h5>
+			<table class="table table-striped border my-2">
+				<thead>
+                    <tr>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+			<tr th:each="contact : ${contacts}">
+				<td th:text="${contact.receiverAccount.accountName}"></td>
+            </tr>
+			</table>
+		</div>
+		</div>
+		
+		<div class="col-sm-6">
+	    <div class="card">	    
+	    	<h5 class="card-header">Create a connection</h5>
+		    <form th:action="@{/contact/save}" th:object="${contactRegistration}" method="post" class="my-2 d-flex flex-column align-items-center">  
+		      <div class="form-group">
+		      	<label for="receiverEmail">Contact Email:</label>
+		      	<input type="text" id="receiverEmail" name="receiverEmail" autofocus="autofocus" th:field="*{receiverEmail}" placeholder="Contact Email"/> <br />
+		        <span class="has-error" th:if="${#fields.hasErrors('receiverEmail')}" th:errors="*{receiverEmail}"></span>
+		      </div>  
+		      <div class="form-group">
+		      	  <input class="btn btn-primary" type="submit" value="Register" />
+		      </div>
+		    </form>
+		</div>
+		</div>
 	    </div>	
-	    </div>	    
+	   	</div>	  
 	</body>
 
 </html>

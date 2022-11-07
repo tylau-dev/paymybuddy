@@ -9,6 +9,9 @@ import com.paymybuddy.prototype.model.User;
 import com.paymybuddy.prototype.model.UserDetailsImpl;
 import com.paymybuddy.prototype.repository.UserRepository;
 
+/*
+ * Implementation of UserDetailsService for Spring Security role based security
+ */
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired

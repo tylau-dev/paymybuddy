@@ -24,7 +24,7 @@ import com.paymybuddy.prototype.repository.AccountRepository;
 public class AccountServiceTest {
     private IAccountService accountService;
 
-    private static Account accountToAdd = new Account(1, "testAccount", new User(), 0);
+    private static Account accountToAdd = new Account(1, "Test Account", new User(), 0);
 
     @Mock
     private AccountRepository accountRepository;
@@ -59,12 +59,44 @@ public class AccountServiceTest {
     }
 
     @Test
+    public void shouldGetDefaultAccount() {
+	User user = new User();
+	user.setUserId(1);
+	when(userService.getUserByEmail("test@email.com")).thenReturn(Optional.of(user));
+	when(accountRepository.getAccountByUserId(user.getUserId())).thenReturn(Optional.of(accountToAdd));
+
+	Account account = accountService.getDefaultAccountByEmail("test@email.com");
+
+	assertEquals(account.getAccountId(), accountToAdd.getAccountId());
+    }
+
+    @Test
     public void shouldSaveAccount() {
 	when(accountRepository.save(any(Account.class))).thenReturn(accountToAdd);
 
 	Account accountUser = accountService.saveAccount(accountToAdd);
 
 	assertEquals(accountUser.getAccountName(), accountToAdd.getAccountName());
+    }
+
+    @Test
+    public void shouldSaveDefaultAccount() {
+	when(accountRepository.save(any(Account.class))).thenReturn(accountToAdd);
+
+	User userToAdd = new User();
+	userToAdd.setFirstName("Account");
+	userToAdd.setLastName("Test");
+
+	Account defaultAccount = accountService.saveDefaultAccount(userToAdd);
+
+	assertEquals(defaultAccount.getAccountName(), userToAdd.getLastName() + " " + userToAdd.getFirstName());
+    }
+
+    @Test
+    public void shouldSaveBalance() {
+	accountService.saveBalance(accountToAdd.getBalance(), accountToAdd.getAccountId());
+
+	verify(accountRepository, times(1)).setBalanceById(accountToAdd.getBalance(), accountToAdd.getAccountId());
     }
 
     @Test

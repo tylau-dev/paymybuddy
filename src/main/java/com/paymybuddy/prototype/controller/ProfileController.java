@@ -15,15 +15,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.paymybuddy.prototype.model.Account;
 import com.paymybuddy.prototype.model.BalanceForm;
 import com.paymybuddy.prototype.model.Contact;
-import com.paymybuddy.prototype.model.ContactForm;
 import com.paymybuddy.prototype.model.User;
 import com.paymybuddy.prototype.service.IAccountService;
 import com.paymybuddy.prototype.service.IContactService;
 import com.paymybuddy.prototype.service.IUserService;
-import com.paymybuddy.prototype.validator.ContactValidator;
 
+/*
+ * Controller for /profile endpoint
+ */
 @Controller
-
 public class ProfileController {
 
     @Autowired
@@ -34,9 +34,6 @@ public class ProfileController {
 
     @Autowired
     private IAccountService accountService;
-
-    @Autowired
-    private ContactValidator contactValidator;
 
     private String currentUserEmail;
 
@@ -56,32 +53,9 @@ public class ProfileController {
 	balanceForm.setCurrentBalance(currentUser.getAccounts().get(0).getBalance());
 
 	model.addAttribute("contacts", currentUserContacts);
-	model.addAttribute("connectionRegistration", new ContactForm());
 	model.addAttribute("balanceForm", balanceForm);
 
 	return "profile";
-    }
-
-    @RequestMapping(value = "/profile/connection/save", method = RequestMethod.POST)
-    public String addContact(@ModelAttribute("connectionRegistration") ContactForm contactForm,
-	    BindingResult bindingResult) {
-
-	contactValidator.validate(contactForm.getReceiverEmail(), bindingResult);
-	if (bindingResult.hasErrors()) {
-	    return "profile";
-	}
-
-	Contact contactToAdd = new Contact();
-
-	Account senderAccount = accountService.getDefaultAccountByEmail(this.currentUserEmail);
-	Account receiverAccount = accountService.getDefaultAccountByEmail(contactForm.getReceiverEmail());
-
-	contactToAdd.setSenderAccount(senderAccount);
-	contactToAdd.setReceiverAccount(receiverAccount);
-
-	contactService.saveContact(contactToAdd);
-
-	return "redirect:/profile";
     }
 
     @RequestMapping(value = "/profile/balance", method = RequestMethod.POST)
