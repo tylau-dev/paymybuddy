@@ -32,6 +32,7 @@ public class ContactController {
     private ContactValidator contactValidator;
 
     private String currentUserEmail;
+    private List<Contact> currentUserContacts;
 
     @RequestMapping(value = { "/contact" }, method = RequestMethod.GET)
     public String contact(Model model, Authentication authentication) {
@@ -39,19 +40,22 @@ public class ContactController {
 
 	model.addAttribute("contactRegistration", new ContactForm());
 
-	List<Contact> currentUserContacts = new ArrayList<Contact>();
-	contactService.getCurrentUserContact(currentUserEmail).forEach(currentUserContacts::add);
+	this.currentUserContacts = new ArrayList<Contact>();
+	contactService.getCurrentUserContact(currentUserEmail).forEach(this.currentUserContacts::add);
 
-	model.addAttribute("contacts", currentUserContacts);
+	model.addAttribute("contacts", this.currentUserContacts);
 
 	return "contact";
     }
 
     @RequestMapping(value = "/contact/save", method = RequestMethod.POST)
     public String addContact(@ModelAttribute("contactRegistration") ContactForm contactForm,
-	    BindingResult bindingResult) {
-	contactValidator.validate(contactForm.getReceiverEmail(), bindingResult);
+	    BindingResult bindingResult, Model model) {
+	contactForm.setCurrentEmail(this.currentUserEmail);
+	contactValidator.validate(contactForm, bindingResult);
+
 	if (bindingResult.hasErrors()) {
+	    model.addAttribute("contacts", this.currentUserContacts);
 	    return "contact";
 	}
 

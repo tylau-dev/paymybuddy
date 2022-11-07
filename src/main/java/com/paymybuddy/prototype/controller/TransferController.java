@@ -70,7 +70,7 @@ public class TransferController {
 	transactionToAdd.setContact(contactService.getContactById(transactionForm.getContactId()).get());
 	transactionToAdd.setDescription(transactionForm.getDescription());
 	transactionToAdd.setTransferredAmount(transactionForm.getTransferredAmount());
-	transactionToAdd.setPaidAmount(transactionForm.getTransferredAmount() * 1.05f);
+	transactionToAdd.setPaidAmount(Math.round(transactionForm.getTransferredAmount() * 1.05f));
 	transactionToAdd.setTransactionDate(new Date());
 
 	// Update balance
