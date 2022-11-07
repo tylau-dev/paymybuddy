@@ -7,13 +7,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.paymybuddy.prototype.service.IUserService;
-
+/*
+ * Controller for /login endpoint
+ */
 @Controller
 public class LoginController {
-    @Autowired
-    private IUserService userService;
-
     @Autowired
     PasswordEncoder passwordEncoder;
 

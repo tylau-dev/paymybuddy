@@ -14,6 +14,9 @@ import com.paymybuddy.prototype.service.IAccountService;
 import com.paymybuddy.prototype.service.IUserService;
 import com.paymybuddy.prototype.validator.UserValidator;
 
+/*
+ * Controller for /register endpoint
+ */
 @Controller
 public class RegisterController {
     @Autowired
@@ -36,9 +39,8 @@ public class RegisterController {
 
     @RequestMapping(value = "/register/save", method = RequestMethod.POST)
     public String registerSave(@ModelAttribute("userRegistration") User user, BindingResult bindingResult) {
-	// @todo : exception handler (existing email)?
+	// Validate form data
 	userValidator.validate(user, bindingResult);
-
 	if (bindingResult.hasErrors()) {
 	    return "register";
 	}

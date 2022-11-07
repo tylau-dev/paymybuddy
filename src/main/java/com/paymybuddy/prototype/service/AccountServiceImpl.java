@@ -2,7 +2,6 @@ package com.paymybuddy.prototype.service;
 
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,12 +9,12 @@ import com.paymybuddy.prototype.model.Account;
 import com.paymybuddy.prototype.model.User;
 import com.paymybuddy.prototype.repository.AccountRepository;
 
+/*
+ * Service for handling Account related operations
+ */
 @Service
 public class AccountServiceImpl implements IAccountService {
-    @Autowired
     private AccountRepository accountRepository;
-
-    @Autowired
     private IUserService userService;
 
     public AccountServiceImpl(AccountRepository accountRepository, IUserService userService) {
@@ -42,6 +41,10 @@ public class AccountServiceImpl implements IAccountService {
 	return accountRepository.save(account);
     }
 
+    /*
+     * Saving default account by creating default AccountName and initilizing
+     * Balance
+     */
     @Override
     @Transactional
     public Account saveDefaultAccount(User user) {

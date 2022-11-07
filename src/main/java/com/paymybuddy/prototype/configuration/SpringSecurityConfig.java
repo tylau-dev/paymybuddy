@@ -13,10 +13,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.paymybuddy.prototype.service.UserDetailsServiceImpl;
 
+/*
+ * Spring Security Configuration for HTTP request filter
+ */
 @Configuration
 @EnableWebSecurity
 @SuppressWarnings("deprecation")
-// ne plus utiliser configurer adapter car deprecier
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {

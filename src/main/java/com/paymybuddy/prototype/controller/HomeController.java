@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.paymybuddy.prototype.model.User;
 import com.paymybuddy.prototype.service.IUserService;
 
+/*
+ * Controller for /home endpoint
+ */
 @Controller
-
 public class HomeController {
     @Autowired
     private IUserService userService;

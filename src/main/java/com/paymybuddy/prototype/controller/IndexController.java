@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.paymybuddy.prototype.model.ContactForm;
 import com.paymybuddy.prototype.validator.ContactValidator;
 
+/*
+ * Controller for /index endpoint
+ */
 @Controller
-
 public class IndexController {
 
     @Autowired

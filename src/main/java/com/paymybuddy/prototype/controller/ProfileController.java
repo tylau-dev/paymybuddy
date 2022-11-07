@@ -20,8 +20,10 @@ import com.paymybuddy.prototype.service.IAccountService;
 import com.paymybuddy.prototype.service.IContactService;
 import com.paymybuddy.prototype.service.IUserService;
 
+/*
+ * Controller for /profile endpoint
+ */
 @Controller
-
 public class ProfileController {
 
     @Autowired

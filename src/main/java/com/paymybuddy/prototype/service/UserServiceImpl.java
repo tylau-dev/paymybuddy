@@ -2,7 +2,6 @@ package com.paymybuddy.prototype.service;
 
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,12 +9,12 @@ import com.paymybuddy.prototype.model.Role;
 import com.paymybuddy.prototype.model.User;
 import com.paymybuddy.prototype.repository.UserRepository;
 
+/*
+ * Service for handling User related operations
+ */
 @Service
 public class UserServiceImpl implements IUserService {
-    @Autowired
     private UserRepository userRepository;
-
-    @Autowired
     private IRoleService roleService;
 
     public UserServiceImpl(UserRepository userRepository, IRoleService roleService) {
@@ -44,7 +43,7 @@ public class UserServiceImpl implements IUserService {
     @Override
     @Transactional
     public User saveUser(User user) {
-	// Role "User" always have id = 1
+	// Assigning by default role "User" (id = 1)
 	Role defaultRole = roleService.getRoleById(1);
 	user.addRole(defaultRole);
 	return userRepository.save(user);

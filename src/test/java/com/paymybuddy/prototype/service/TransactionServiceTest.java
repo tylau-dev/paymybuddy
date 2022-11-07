@@ -31,9 +31,12 @@ public class TransactionServiceTest {
     @Mock
     private TransactionRepository transactionRepository;
 
+    @Mock
+    private IContactService contactService;
+
     @BeforeEach
     public void setUp() {
-	transactionService = new TransactionServiceImpl(transactionRepository);
+	transactionService = new TransactionServiceImpl(transactionRepository, contactService);
     }
 
     @Test
