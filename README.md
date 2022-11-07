@@ -3,7 +3,7 @@
 Paymybuddy is a project interacts with a MySQL Database through Ja
 
 # UML Diagram
-![umldiagram](https://user-images.githubusercontent.com/62340191/199959415-3d4ea49c-abf3-46af-8db2-e250c6dcfd64.PNG)
+![image](https://user-images.githubusercontent.com/62340191/200431719-cd9428af-09f8-4701-9969-63a67518aa54.png)
 
 # MPD Diagram
 ![mpddiagram](https://user-images.githubusercontent.com/62340191/199959462-b31e5df6-6509-4963-925e-3b492c4145de.PNG)
