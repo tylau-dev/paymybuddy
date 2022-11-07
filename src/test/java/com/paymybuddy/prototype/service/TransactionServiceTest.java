@@ -58,6 +58,18 @@ public class TransactionServiceTest {
     }
 
     @Test
+    public void shouldGetTransactionByMail() {
+	List<Transaction> transactionList = new ArrayList<>();
+	transactionList.add(transactionToAdd);
+
+	when(transactionRepository.getTransactionByEmail("test@email.com")).thenReturn(transactionList);
+
+	List<Transaction> transactions = (List<Transaction>) transactionService.getTransactionsByMail("test@email.com");
+
+	assertEquals(transactions.get(0).getTransactionId(), transactionToAdd.getTransactionId());
+    }
+
+    @Test
     public void shouldSaveTransaction() {
 	when(transactionRepository.save(any(Transaction.class))).thenReturn(transactionToAdd);
 

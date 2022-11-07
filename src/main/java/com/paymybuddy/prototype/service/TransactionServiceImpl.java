@@ -31,7 +31,7 @@ public class TransactionServiceImpl implements ITransactionService {
 
     @Override
     @Transactional
-    public Iterable<Transaction> getCurrentUserTransaction(String email) {
+    public Iterable<Transaction> getTransactionsByMail(String email) {
 	return transactionRepository.getTransactionByEmail(email);
     }
 

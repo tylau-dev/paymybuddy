@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.paymybuddy.prototype.model.Role;
 import com.paymybuddy.prototype.model.User;
-import com.paymybuddy.prototype.repository.RoleRepository;
 import com.paymybuddy.prototype.repository.UserRepository;
 
 @Service
@@ -17,10 +16,11 @@ public class UserServiceImpl implements IUserService {
     private UserRepository userRepository;
 
     @Autowired
-    private RoleRepository roleRepository;
+    private IRoleService roleService;
 
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, IRoleService roleService) {
 	this.userRepository = userRepository;
+	this.roleService = roleService;
     }
 
     @Override
@@ -44,7 +44,8 @@ public class UserServiceImpl implements IUserService {
     @Override
     @Transactional
     public User saveUser(User user) {
-	Role defaultRole = roleRepository.findById(1).get();
+	// Role "User" always have id = 1
+	Role defaultRole = roleService.getRoleById(1);
 	user.addRole(defaultRole);
 	return userRepository.save(user);
     }

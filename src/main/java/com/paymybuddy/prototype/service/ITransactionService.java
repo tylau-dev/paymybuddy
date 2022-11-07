@@ -10,7 +10,7 @@ public interface ITransactionService {
 
     public Optional<Transaction> getTransactionById(Integer id);
 
-    public Iterable<Transaction> getCurrentUserTransaction(String email);
+    public Iterable<Transaction> getTransactionsByMail(String email);
 
     public Transaction saveTransaction(Transaction transaction);
 

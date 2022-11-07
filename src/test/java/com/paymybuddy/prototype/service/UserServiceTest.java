@@ -16,6 +16,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.paymybuddy.prototype.model.Role;
 import com.paymybuddy.prototype.model.User;
 import com.paymybuddy.prototype.repository.UserRepository;
 
@@ -24,14 +25,19 @@ public class UserServiceTest {
     private IUserService userService;
 
     private static User userToAdd = new User(1, "testemail@email.com", "123", "test_user", "test_user_ln_1");
+    private static Role roleMock = new Role(0, "user");
 
     @Mock
     private UserRepository userRepository;
 
+    @Mock
+    private IRoleService roleService;
+
     @BeforeEach
     public void setUp() {
 	MockitoAnnotations.initMocks(this);
-	userService = new UserServiceImpl(userRepository);
+
+	userService = new UserServiceImpl(userRepository, roleService);
     }
 
     @Test
@@ -47,6 +53,15 @@ public class UserServiceTest {
 
     @Test
     public void shouldGetOneUser() {
+	when(userRepository.findByEmail(userToAdd.getEmail())).thenReturn(Optional.of(userToAdd));
+
+	Optional<User> user = userService.getUserByEmail(userToAdd.getEmail());
+
+	assertEquals(user.get().getUserId(), userToAdd.getUserId());
+    }
+
+    @Test
+    public void shouldGetUserByMail() {
 	when(userRepository.findById(userToAdd.getUserId())).thenReturn(Optional.of(userToAdd));
 
 	Optional<User> user = userService.getUserById(userToAdd.getUserId());
@@ -57,6 +72,8 @@ public class UserServiceTest {
     @Test
     public void shouldSaveUser() {
 	when(userRepository.save(any(User.class))).thenReturn(userToAdd);
+
+	when(roleService.getRoleById(1)).thenReturn(roleMock);
 
 	User savedUser = userService.saveUser(userToAdd);
 

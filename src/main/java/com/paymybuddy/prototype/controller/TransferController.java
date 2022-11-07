@@ -43,7 +43,7 @@ public class TransferController {
 
 	// Retrieving data for transaction table
 	List<Transaction> currentUserTransactions = new ArrayList<Transaction>();
-	transactionService.getCurrentUserTransaction(currentUserEmail).forEach(currentUserTransactions::add);
+	transactionService.getTransactionsByMail(currentUserEmail).forEach(currentUserTransactions::add);
 
 	// Retrieving data for list of contact
 	this.currentUserContacts = new ArrayList<Contact>();

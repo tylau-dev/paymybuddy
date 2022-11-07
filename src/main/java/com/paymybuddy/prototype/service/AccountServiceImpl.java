@@ -11,7 +11,6 @@ import com.paymybuddy.prototype.model.User;
 import com.paymybuddy.prototype.repository.AccountRepository;
 
 @Service
-// Add Interface
 public class AccountServiceImpl implements IAccountService {
     @Autowired
     private AccountRepository accountRepository;
