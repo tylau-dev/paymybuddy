@@ -3,10 +3,10 @@
 Paymybuddy is a project interacts with a MySQL Database through Ja
 
 # UML Diagram
-![image](https://user-images.githubusercontent.com/62340191/200431719-cd9428af-09f8-4701-9969-63a67518aa54.png)
+![Lau_Tsyyeung_4_uml_112022](https://user-images.githubusercontent.com/62340191/201066009-7080d7c9-0d14-4b10-9580-2ea3a6246e1e.PNG)
 
 # MPD Diagram
-![mpddiagram](https://user-images.githubusercontent.com/62340191/199959462-b31e5df6-6509-4963-925e-3b492c4145de.PNG)
+![Lau_Tsyyeung_4_mpd_112022](https://user-images.githubusercontent.com/62340191/201065984-1137c501-feb1-448a-ba01-6853f813eaef.PNG)
 
 # Requirements
 - JDK 17.0.1
@@ -29,7 +29,7 @@ mvn spring-boot:run
 2) The Web Application is running on the port 8080. 
 
 3) Following is the list of the Front-End interface
-4) 
+
 | Endpoint | Content |
 |----------|---------|
 |   / or /index       | Landing Page |
